@@ -1,0 +1,25 @@
+{
+    "name": "OProf77/scholeio",
+    "type": "drupal-theme",
+    "description": "Scholeío è un sub-theme drupal, basato sul tema Skenografia, che implementa il design delle scuole.",
+    "keywords": ["Drupal", "theme", "Scholeío","Skenografia", "sub-theme"],
+    "homepage": "https://github.com/OProf77/scholeio",
+    "license": "AGPL-3.0-only",
+    "authors": [
+        {
+            "name": "Crescenzo Velleca",
+            "email": "info@softwebadvice.com",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/OProf77/scholeio/issues",
+        "source": "https://github.com/OProf77/scholeio"
+    },
+    "require": {
+        "drupal/core": "^10",
+        "drupal/skenografia": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
