@@ -18,7 +18,7 @@
     },
     "require": {
         "drupal/core": "^10",
-        "drupal/skenografia": "*"
+        "ouitoulia/skenografia": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
