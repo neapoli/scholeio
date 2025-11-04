@@ -1,0 +1,91 @@
+{#
+/**
+ * @file
+ * Template for footer component.
+ * Docs: https://italia.github.io/bootstrap-italia/docs/menu-di-navigazione/footer/
+ * Latest revision: v2.7.1
+ *
+ * Available variables:
+ *
+ * @see template_preprocess_page()
+ * @see page.html.twig
+ *
+ * @ingroup themeable
+ *
+ */
+#}
+{% apply spaceless %}
+  {% embed '@bootstrap_italia/layout/footer/_partial.footer.html.twig' %}
+    {% block footerBrand %}
+      {% if page.brand %}
+        <h2 class="visually-hidden-focusable">Piè di pagina</h2>
+        <section>
+          <div class="row clearfix">
+            <div class="col-sm-12 footer-items-wrapper logo-wrapper d-flex align-items-center">
+              <img class="ue-logo" src="{{ skenografia_libraries_path }}/images/logo-eu-inverted.svg" alt="Finanziato dall'Unione europea - NextGenerationEU - PNRR 1.4.1" loading="lazy" height="56" width="256">
+              {{ page.brand }}
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    {% endblock %}
+
+    {% block footerSmallPrints %}
+      {% if page.footer_small_prints or socials %}
+        {% set footer_small_prints_classes = page.footer_small_prints and socials ? 'col-md-7 col-lg-9' : 'col' %}
+        {% set footer_socials_classes = page.footer_small_prints and socials ? 'col-md-5 col-lg-3 pt-4' : 'col pt-4' %}
+
+        <div class="it-footer-small-prints clearfix">
+          <div class="container">
+            <div class="row ps-3">
+              {% if page.footer_small_prints %}
+                <div class="{{ footer_small_prints_classes }}">
+                  {{ page.footer_small_prints }}
+                </div>
+              {% endif %}
+              {% if socials %}
+                <div class="text-light text-align-right {{ footer_socials_classes }}">
+                  {% include '@bi-bcl/share/follow-us.html.twig' with {
+                    socials: socials,
+                    label: 'Follow us on'|t,
+                    icon_color: 'white',
+                    blank: social_new_window,
+                    followus_classes: ['it-socials', 'd-flex', 'justify-content-end']
+                  } %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    {% block footerEnd %}
+      <section class="it-footer-main">
+        <div class="container">
+          <div class="row variable-gutters">
+            <div class="col">
+              {{ page.footer_info_legali }}
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row variable-gutters justify-content-end">
+            <div class="col py-5">
+              <p class="small text-center">
+                <a class="text-uppercase fw-bolder" href="https://github.com/ouitoulia/" title="Ouitoulía - CMS Drupal basato sul modello delle scuole italiane" rel="nofollow noreferrer">Ouitoulía</a> è un CMS open source sviluppato con Drupal,
+                promosso dall'Istituto comprensivo "Marvasi-Vizzone" e finanziato con la misura 1.4.1 del PNRR.
+              </p>
+              <p class="small text-end">
+                <a class="text-underline-hover mt-2" href="https://github.com/ouitoulia/" title="Lista degli sviluppatori di Ouitoulía" rel="nofollow noreferrer">
+                  Sviluppato da Pietro Arturo Panetta, installato e configurato da Crescenzo Velleca e ...
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endblock %}
+
+  {% endembed %}
+{% endapply %}
