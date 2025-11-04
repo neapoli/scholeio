@@ -2,7 +2,7 @@
     "name": "neapoli/scholeio",
     "type": "drupal-theme",
     "description": "Scholeío è un sub-theme drupal, basato sul tema Skenografia, che implementa il design delle scuole.",
-    "keywords": ["Drupal", "theme", "Scholeío","Skenografia", "sub-theme"],
+    "keywords": ["Drupal", "theme", "Scholeío", "Skenografia", "sub-theme"],
     "homepage": "https://github.com/neapoli/scholeio",
     "license": "AGPL-3.0-only",
     "authors": [
