@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * Theme override del form dei filtri esposti della vista "taxonomy_term".
+ *
+ * I filtri sono disposti su una griglia Bootstrap Italia, al massimo 3 per
+ * riga, tutti della stessa larghezza: la larghezza si calcola dal numero di
+ * filtri (1 → 100%, 2 → 50%, 3 o più → 33%), quindi aggiungendo o togliendo
+ * filtri dalla vista il layout si adatta da solo. Sotto i 768px si impilano.
+ *
+ * I pulsanti Applica e Reset stanno su una riga a sé, sotto i filtri.
+ *
+ * Sono usate solo classi già presenti in Bootstrap Italia:
+ * - row / col-12 / col-md-*: griglia e larghezza delle colonne;
+ * - align-items-end: allinea i campi sulla stessa linea di base;
+ * - mb-0 sul contenitore di ogni campo: Bootstrap Italia assegna .form-group
+ *   (margin-bottom: 3rem) ai campi di testo ma .select-wrapper (senza margine)
+ *   alle tendine, ed è questa differenza che fa sembrare "Titolo" più in alto
+ *   di "Tipo di contenuto". Azzerando il margine i campi tornano allineati;
+ * - mb-3 sulle colonne: spaziatura fra i filtri quando si impilano sul mobile.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+  {{ q }}
+{% endif %}
+
+{# Prima raccoglie i filtri, poi ne ricava la larghezza delle colonne. #}
+{% set filter_keys = [] %}
+{% for key, element in form %}
+  {% if key|first != '#' and key != 'actions' and element['#type'] not in ['hidden', 'token'] %}
+    {% set filter_keys = filter_keys|merge([key]) %}
+  {% endif %}
+{% endfor %}
+{% set per_row = min(filter_keys|length, 3) %}
+{% set col_class = per_row > 0 ? 'col-md-' ~ (12 // per_row) : 'col-md-12' %}
+
+{% if filter_keys %}
+  <div class="row variable-gutters align-items-end">
+    {% for key in filter_keys %}
+      {% set element = form[key] %}
+      {% set wrapper = element['#wrapper_attributes']|default({}) %}
+      {% set wrapper = wrapper|merge({'class': (wrapper.class|default([]))|merge(['mb-0'])}) %}
+      <div class="col-12 {{ col_class }} mb-3">
+        {{ element|merge({'#wrapper_attributes': wrapper}) }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if form.actions %}
+  <div class="row variable-gutters">
+    <div class="col-12">
+      {{ form.actions }}
+    </div>
+  </div>
+{% endif %}
+
+{# Campi nascosti (form_build_id, form_token, form_id): fuori dalla griglia. #}
+{% for key, element in form %}
+  {% if key|first != '#' and element['#type'] in ['hidden', 'token'] %}
+    {{ element }}
+  {% endif %}
+{% endfor %}
