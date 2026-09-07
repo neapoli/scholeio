@@ -4,11 +4,16 @@
 }
 
 /*** Impostazioni CSS per il menù secondario ***/
-.it-header-navbar-wrapper.theme-light-desk .navbar .dropdown-menu,
-.it-header-navbar-wrapper.theme-light-desk .navbar .dropdown-menu:before {
-  background: #155c8c;
+/* Solo da desktop: sotto i 992px il menù secondario non è una tendina
+   sovrapposta ma una lista dentro il pannello del menù, e lo sfondo pieno
+   la staccherebbe dal resto. */
+@media (min-width: 992px) {
+  .it-header-navbar-wrapper.theme-light-desk .navbar-secondary .dropdown-menu,
+  .it-header-navbar-wrapper.theme-light-desk .navbar-secondary .dropdown-menu:before {
+    background: #155c8c;
+  }
 }
-.it-header-navbar-wrapper.theme-light-desk .navbar .navbar-collapsable .navbar-nav li a.nav-link.active {
+.it-header-navbar-wrapper.theme-light-desk .navbar .navbar-collapsable .navbar-secondary li a.nav-link.active {
   border-bottom-color: #155c8c;
 }
 
@@ -36,7 +41,7 @@
   background-color: #0e2b61 !important;
   border: none;
 }
-.view-primo-livello-didattica .container .nav-tabs.nav-dark{
+.view-primo-livello-didattica .container .nav-tabs.nav-dark {
   background-color: #1da9d0 !important;
 }
 .view-primo-livello-didattica .container .nav-tabs.nav-dark .nav-link.active {

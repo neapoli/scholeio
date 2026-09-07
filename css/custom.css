@@ -4,17 +4,22 @@
 }
 
 /*Impostazioni CSS per il menù secondario*/
-.it-header-navbar-wrapper.theme-light-desk .navbar .dropdown-menu,
-.it-header-navbar-wrapper.theme-light-desk .navbar .dropdown-menu:before {
-  background: #0059b3;
+/* Solo da desktop: sotto i 992px il menù secondario non è una tendina
+   sovrapposta ma una lista dentro il pannello del menù, e lo sfondo pieno
+   la staccherebbe dal resto. */
+@media (min-width: 992px) {
+  .it-header-navbar-wrapper.theme-light-desk .navbar-secondary .dropdown-menu,
+  .it-header-navbar-wrapper.theme-light-desk .navbar-secondary .dropdown-menu:before {
+    background: #0059b3;
+  }
 }
-.it-header-navbar-wrapper.theme-light-desk .navbar .navbar-collapsable .navbar-nav li a.nav-link.active {
-  border-bottom-color:#0059b3;
+.it-header-navbar-wrapper.theme-light-desk .navbar .navbar-collapsable .navbar-secondary li a.nav-link.active {
+  border-bottom-color: #0059b3;
 }
 
 /*Impostazioni CSS per il blocco intestazioni prima pagina*/
 @media (min-width: 992px) {
-  .view-prima-pagina-slide-intestazione .splide .splide__track{
+  .view-prima-pagina-slide-intestazione .splide .splide__track {
     background: #fff;
     height: 434px;
   }
